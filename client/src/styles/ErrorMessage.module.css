@@ -2,20 +2,65 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
   padding: 2rem;
-  background-color: rgba(255, 73, 73, 0.1);
-  border-radius: 12px;
-  border-left: 4px solid #ff4949;
-  animation: fadeIn 0.3s ease-out;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-xl);
+  max-width: 500px;
+  width: 100%;
+  animation: scaleIn 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.error::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ef4444, #dc2626);
 }
 
 .errorIcon {
-  font-size: 2rem;
-  margin: 0 0 1rem 0;
+  font-size: 3rem;
+  margin: 0;
+  animation: pulse 2s ease-in-out infinite;
 }
 
 .errorText {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary-light);
   text-align: center;
   margin: 0;
-  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* Dark mode */
+:global(.dark-mode) .error {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.15) 100%);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+:global(.dark-mode) .errorText {
+  color: var(--text-primary-dark);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .error {
+    padding: 1.5rem;
+  }
+  
+  .errorIcon {
+    font-size: 2.5rem;
+  }
+  
+  .errorText {
+    font-size: 0.875rem;
+  }
 }

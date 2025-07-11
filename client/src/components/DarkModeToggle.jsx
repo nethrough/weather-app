@@ -7,7 +7,7 @@ const DarkModeToggle = ({ isDarkMode, toggleDarkMode }) => {
       onClick={toggleDarkMode}
       aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      {isDarkMode ? '☀️' : '🌙'}
+      <span>{isDarkMode ? '☀️' : '🌙'}</span>
     </button>
   );
 };

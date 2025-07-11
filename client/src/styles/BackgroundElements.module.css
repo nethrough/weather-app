@@ -1,0 +1,209 @@
+.backgroundContainer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Animated weather icons */
+.weatherIcon {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.1;
+  animation: floatAround 30s infinite ease-in-out;
+}
+
+:global(.dark-mode) .weatherIcon {
+  opacity: 0.06;
+}
+
+.icon1 {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 25s;
+}
+
+.icon2 {
+  top: 20%;
+  right: 15%;
+  animation-delay: 5s;
+  animation-duration: 30s;
+}
+
+.icon3 {
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 10s;
+  animation-duration: 35s;
+}
+
+.icon4 {
+  bottom: 20%;
+  right: 10%;
+  animation-delay: 15s;
+  animation-duration: 28s;
+}
+
+.icon5 {
+  top: 50%;
+  left: 50%;
+  animation-delay: 20s;
+  animation-duration: 32s;
+}
+
+/* Animated shapes */
+.shape {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+  filter: blur(40px);
+}
+
+:global(.dark-mode) .shape {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(147, 51, 234, 0.15) 100%);
+}
+
+.shape1 {
+  width: 300px;
+  height: 300px;
+  top: -150px;
+  left: -150px;
+  animation: morphShape 20s infinite ease-in-out;
+}
+
+.shape2 {
+  width: 400px;
+  height: 400px;
+  bottom: -200px;
+  right: -200px;
+  animation: morphShape 25s infinite ease-in-out reverse;
+}
+
+.shape3 {
+  width: 250px;
+  height: 250px;
+  top: 40%;
+  left: 60%;
+  animation: morphShape 30s infinite ease-in-out;
+}
+
+/* Particles */
+.particles {
+  position: absolute;
+  inset: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  animation: particleFloat linear infinite;
+}
+
+:global(.dark-mode) .particle {
+  background: rgba(59, 130, 246, 0.4);
+}
+
+.particle1 { left: 10%; animation-duration: 20s; animation-delay: 0s; }
+.particle2 { left: 20%; animation-duration: 25s; animation-delay: 2s; }
+.particle3 { left: 30%; animation-duration: 18s; animation-delay: 4s; }
+.particle4 { left: 40%; animation-duration: 22s; animation-delay: 1s; }
+.particle5 { left: 50%; animation-duration: 28s; animation-delay: 3s; }
+.particle6 { left: 60%; animation-duration: 20s; animation-delay: 5s; }
+.particle7 { left: 70%; animation-duration: 24s; animation-delay: 2s; }
+.particle8 { left: 80%; animation-duration: 19s; animation-delay: 4s; }
+.particle9 { left: 90%; animation-duration: 26s; animation-delay: 1s; }
+.particle10 { left: 15%; animation-duration: 21s; animation-delay: 6s; }
+.particle11 { left: 25%; animation-duration: 23s; animation-delay: 3s; }
+.particle12 { left: 35%; animation-duration: 27s; animation-delay: 5s; }
+.particle13 { left: 45%; animation-duration: 20s; animation-delay: 2s; }
+.particle14 { left: 55%; animation-duration: 25s; animation-delay: 4s; }
+.particle15 { left: 65%; animation-duration: 22s; animation-delay: 1s; }
+.particle16 { left: 75%; animation-duration: 24s; animation-delay: 6s; }
+.particle17 { left: 85%; animation-duration: 26s; animation-delay: 3s; }
+.particle18 { left: 5%; animation-duration: 28s; animation-delay: 5s; }
+.particle19 { left: 95%; animation-duration: 21s; animation-delay: 2s; }
+.particle20 { left: 12%; animation-duration: 23s; animation-delay: 4s; }
+
+/* Animations */
+@keyframes floatAround {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(50px, -30px) rotate(90deg) scale(1.1);
+  }
+  50% {
+    transform: translate(-30px, 50px) rotate(180deg) scale(0.9);
+  }
+  75% {
+    transform: translate(30px, 30px) rotate(270deg) scale(1.05);
+  }
+}
+
+@keyframes morphShape {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+    border-radius: 50%;
+  }
+  25% {
+    transform: rotate(90deg) scale(1.2);
+    border-radius: 40%;
+  }
+  50% {
+    transform: rotate(180deg) scale(0.8);
+    border-radius: 60%;
+  }
+  75% {
+    transform: rotate(270deg) scale(1.1);
+    border-radius: 45%;
+  }
+}
+
+@keyframes particleFloat {
+  from {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(-100px) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .weatherIcon {
+    font-size: 1.5rem;
+  }
+  
+  .shape1 {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .shape2 {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .shape3 {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .particle {
+    width: 3px;
+    height: 3px;
+  }
+}

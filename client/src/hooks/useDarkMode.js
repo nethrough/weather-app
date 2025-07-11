@@ -1,55 +1,52 @@
 import { useState, useEffect } from 'react';
 
-/**
- * Custom hook to handle dark mode toggle with local storage persistence
- * @returns {[boolean, Function]} - Dark mode state and toggle function
- */
 export const useDarkMode = () => {
-  // Check if user previously set dark mode preference
-  const storedDarkMode = localStorage.getItem('darkMode');
-  const [isDarkMode, setIsDarkMode] = useState(
-    storedDarkMode !== null ? JSON.parse(storedDarkMode) : 
-    // Check system preference as fallback
-    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-  );
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Check localStorage first
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode !== null) {
+      return JSON.parse(savedMode);
+    }
+    // Check system preference
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
 
-  // Update localStorage when dark mode changes
   useEffect(() => {
+    // Apply or remove dark mode class
+    const root = document.documentElement;
+    const body = document.body;
+    
+    if (isDarkMode) {
+      root.classList.add('dark-mode');
+      body.classList.add('dark-mode');
+    } else {
+      root.classList.remove('dark-mode');
+      body.classList.remove('dark-mode');
+    }
+    
+    // Save to localStorage
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 
-  // Add listener for system preference changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    
     const handleChange = (e) => {
-      // Only update if user hasn't manually set preference
-      if (localStorage.getItem('darkMode') === null) {
+      const savedMode = localStorage.getItem('darkMode');
+      if (savedMode === null) {
         setIsDarkMode(e.matches);
       }
     };
 
-    // Add event listener (using the appropriate method based on browser support)
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', handleChange);
-    } else {
-      // Fallback for older browsers
-      mediaQuery.addListener(handleChange);
-    }
-
-    // Clean up
+    mediaQuery.addEventListener('change', handleChange);
+    
     return () => {
-      if (mediaQuery.removeEventListener) {
-        mediaQuery.removeEventListener('change', handleChange);
-      } else {
-        // Fallback for older browsers
-        mediaQuery.removeListener(handleChange);
-      }
+      mediaQuery.removeEventListener('change', handleChange);
     };
   }, []);
 
-  // Toggle function
   const toggleDarkMode = () => {
-    setIsDarkMode(prevMode => !prevMode);
+    setIsDarkMode(prev => !prev);
   };
 
   return [isDarkMode, toggleDarkMode];

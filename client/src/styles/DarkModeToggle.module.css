@@ -1,25 +1,84 @@
 .toggle {
-  background: none;
+  position: relative;
+  width: 60px;
+  height: 60px;
+  background: var(--bg-primary-light);
   border: none;
+  border-radius: var(--radius-full);
   cursor: pointer;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--transition-speed);
-  background-color: rgba(0, 0, 0, 0.05);
+  font-size: 1.5rem;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md-light);
+  overflow: hidden;
 }
 
-.dark {
-  background-color: rgba(255, 255, 255, 0.1);
+.toggle::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: var(--accent-gradient);
+  border-radius: var(--radius-full);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  z-index: -1;
 }
 
-.light {
-  background-color: rgba(0, 0, 0, 0.05);
+.toggle::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  background: var(--bg-primary-light);
+  border-radius: var(--radius-full);
+  z-index: -1;
 }
 
 .toggle:hover {
-  transform: rotate(15deg);
+  transform: scale(1.1) rotate(15deg);
+}
+
+.toggle:hover::before {
+  opacity: 1;
+}
+
+.toggle:active {
+  transform: scale(0.95);
+}
+
+.dark {
+  background: var(--bg-secondary-dark);
+  box-shadow: var(--shadow-md-dark);
+}
+
+.dark::after {
+  background: var(--bg-secondary-dark);
+}
+
+/* Icon animation */
+.toggle span {
+  display: inline-block;
+  transition: transform var(--transition-base);
+}
+
+.toggle:hover span {
+  transform: rotate(180deg);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .toggle {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toggle {
+    width: 45px;
+    height: 45px;
+    font-size: 1.125rem;
+  }
 }
